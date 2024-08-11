@@ -1,0 +1,9 @@
+.sectionWrapper {
+    padding: 18px 32px;
+}
+.sectionHeaderWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}

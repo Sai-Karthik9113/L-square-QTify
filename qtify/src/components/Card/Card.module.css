@@ -1,0 +1,12 @@
+.card {
+    width: 100%;
+}
+.cardContent {
+    display: flex;
+    align-items: flex-start;
+    
+
+}
+.albumName {
+    text-align: left;
+}
