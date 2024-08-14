@@ -3,11 +3,12 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import styles from './App.module.css';
 import { fetchAllData } from './helpers/api.jsx';
+import { songs } from './helpers/api.jsx';
 import Section from './components/Section/Section.jsx';
 import FilterSection from './components/FilterSection/FilterSection';
 
 function App() {
-  const [albumData, setAlbumData] = useState({ topAlbums: [], newAlbums: [], songs: [] });
+  const [albumData, setAlbumData] = useState({ topAlbums: [], newAlbums: [] });
   const [toggle, setToggle] = useState(false);
   const [value, setValue] = useState(0);
 
@@ -21,8 +22,8 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const { topAlbums, newAlbums, songs } = await fetchAllData();
-      setAlbumData({ topAlbums, newAlbums, songs });
+      const { topAlbums, newAlbums } = await fetchAllData();
+      setAlbumData({ topAlbums, newAlbums });
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +33,7 @@ function App() {
     fetchData();
   }, []);
 
-  // console.log(albumData.songs);
+  console.log(albumData.songs, albumData.newAlbums, albumData.topAlbums);
   
 
   return (
@@ -43,7 +44,7 @@ function App() {
         <Section type='album' title='Top Albums' data={albumData.topAlbums} />
         <Section type='album' title='New Albums' data={albumData.newAlbums} />
         <FilterSection
-          data={albumData.songs}
+          data={songs}
           type='songFilter'
           title='Songs'
           value={value}
