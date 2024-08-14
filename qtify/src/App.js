@@ -22,7 +22,7 @@ function App() {
   const fetchData = async () => {
     try {
       const { topAlbums, newAlbums, songs } = await fetchAllData();
-      setAlbumData({ topAlbums: topAlbums || [], newAlbums: newAlbums || [], songs: songs || [] });
+      setAlbumData({ topAlbums, newAlbums, songs });
     } catch (error) {
       console.log(error);
     }
