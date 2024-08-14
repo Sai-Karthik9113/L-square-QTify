@@ -5,18 +5,10 @@
 }
 
 .cardWrapper{
-    margin-top: 18px;
+    margin-top: 30px;
 }
 .wrapper{
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
-}
-.toggleText{
-    color: var(--color-primary);
-    cursor: pointer;
-}
-h3 {
-    font-size: 20px;
-    font-weight: 600;
 }

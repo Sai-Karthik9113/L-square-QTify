@@ -1,34 +1,118 @@
-import React from "react";
+import React from 'react'
 import styles from "./Card.module.css"
-import { truncate } from "../../helpers/helpers";
+import { truncate } from '../../helpers/helpers';
 import {
     Card,
     CardContent,
     CardMedia,
     CardActionArea,
     Chip,
-    Typography
+    Tooltip
 } from "@mui/material";
 
-const AlbumCard = ({ albumCover }) => {
+const AlbumCard = ({data,type}) => {
 
-    return (
-        <div className={styles.cardWrapper}>
-            <Card className={styles.card} sx={{ borderRadius: '10px' }}>
-                <CardActionArea className={styles.CardActionArea}>
-                    <CardMedia component="img" height="170" image={albumCover.image} alt={albumCover.slug} />
+  const getCard = (type) => {
+
+    switch(type) {
+
+      case "album" : {
+        const {image,follows,title,songs} = data;
+
+        return (
+
+          <Tooltip title={`${songs?.length} songs`} placement='top' arrow>
+          <div className={styles.wrapper}>
+            <Card sx={{ borderRadius: '10px' }} className={styles.card}>
+                <CardActionArea>
+                    <CardMedia component="img" height="170" image={image} alt='album' />
                     <CardContent className={styles.cardContent}>
                         <Chip
-                            sx={{ color: 'var(--color-white)', backgroundColor: 'var(--color-black)', borderRadius: '10px', padding: '4px 8px', fontWeight: '400', fontSize: '10px' }} className={styles.chip} label={`${albumCover.follows} Follows`} />
+                        sx={{
+                                padding: '4px 8px',
+                                fontFamily: 'Poppins, Arial, sans-serif',
+                                fontWeight: '400',
+                                fontSize: '10px',
+                                '& .MuiChip-label':{
+                                    padding: 0
+                                }
+                        }} 
+                        label={`${follows} Follows`} className={styles.chip} size="small"/>
                     </CardContent>
                 </CardActionArea>
             </Card>
-            <Typography sx={{ marginTop: '6px', fontSize: '14px' }} className={styles.albumName}>
-                {truncate(albumCover.title, 15)}
-            </Typography>
-        </div>
-
-    );
+            <div className={styles.titleWrapper}>
+              <p>{truncate(title, 30)}</p>
+            </div>
+          </div>
+          </Tooltip>
+        )
+      }
+      case "song" : {
+        
+        const {image,likes,title,songs} = data;
+        return (
+          <Tooltip title={`${songs?.length} songs`} placement='top' arrow>
+          <div className={styles.wrapper}>
+          <Card sx={{ borderRadius: '10px' }} className={styles.card}>
+                <CardActionArea>
+                    <CardMedia component="img" height="170" image={image} alt='album' />
+                    <CardContent className={styles.cardContent}>
+                        <Chip
+                        sx={{
+                                padding: '4px 8px',
+                                fontFamily: 'Poppins, Arial, sans-serif',
+                                fontWeight: '400',
+                                fontSize: '10px',
+                                '& .MuiChip-label':{
+                                    padding: 0
+                                }
+                        }} 
+                        label={`${likes} Likes`} className={styles.chip} size="small"/>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+            <div className={styles.titleWrapper}>
+              <p>{truncate(title, 30)}</p>
+            </div>
+          </div>
+          </Tooltip>
+        )
+      }
+      case 'songFilter' : {
+        const {image,likes,title} = data;
+        return (
+        <div className={styles.wrapper}>
+          <Card sx={{ borderRadius: '10px' }} className={styles.card}>
+                <CardActionArea>
+                    <CardMedia component="img" height="170" image={image} alt='album' />
+                    <CardContent className={styles.cardContent}>
+                        <Chip
+                        sx={{
+                                padding: '4px 8px',
+                                fontFamily: 'Poppins, Arial, sans-serif',
+                                fontWeight: '400',
+                                fontSize: '10px',
+                                '& .MuiChip-label':{
+                                    padding: 0
+                                }
+                        }} 
+                        label={`${likes} Likes`} className={styles.chip} size="small"/>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+            <div className={styles.titleWrapper}>
+              <p>{truncate(title, 30)}</p>
+            </div>
+          </div>
+                    
+        )
+      }
+      default:
+        return <></>
+    } 
+  }
+  return getCard(type)
 }
 
 export default AlbumCard;
