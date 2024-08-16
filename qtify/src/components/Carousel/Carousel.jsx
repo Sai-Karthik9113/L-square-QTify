@@ -9,7 +9,7 @@ import CarouselRight from './CarouselRight/CarouselRight'
 
 const Controls = ({data}) => {
     let swiper = useSwiper();
-    console.log(swiper)
+    // console.log(swiper)
     useEffect(() => {
         // swiper.slideTo(0)
     },[data])

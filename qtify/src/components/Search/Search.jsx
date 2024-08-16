@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Search.module.css";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import { useAutocomplete } from "@mui/material";
@@ -37,6 +37,9 @@ const Listbox = styled("ul")(() => ({
 }));
 
 function Search({ searchData, placeholder }) {
+
+  const [inputValue, setInputValue] = useState("");
+
   const {
     getRootProps,
     getInputLabelProps,
@@ -47,15 +50,22 @@ function Search({ searchData, placeholder }) {
     groupedOptions,
   } = useAutocomplete({
     id: "use-autocomplete-demo",
-    options: searchData || [],
+    options: searchData,
     getOptionLabel: (option) => option.title,
+    inputValue, // Controlled input value
+    onInputChange: (event, newInputValue) => {
+      setInputValue(newInputValue); // Update input value state
+    },
+    freeSolo: true,
   });
 
   const navigate = useNavigate();
   const onSubmit = (e, value) => {
     e.preventDefault();
     console.log(value);
-    navigate(`/album/${value.slug}`);
+    if (value && value.slug) {
+      navigate(`/album/${value.slug}`);
+    }
     //Process form data, call API, set state etc.
   };
 
@@ -69,11 +79,13 @@ function Search({ searchData, placeholder }) {
       >
         <div {...getRootProps()}>
           <input
+            type="text"
             name="album"
             className={styles.search}
             placeholder={placeholder}
-            required
             {...getInputProps()}
+            value={inputValue} // Set input value from state
+            onChange={(e) => setInputValue(e.target.value)} // Handle input change
           />
         </div>
         <div>
@@ -86,15 +98,17 @@ function Search({ searchData, placeholder }) {
         <Listbox {...getListboxProps()}>
           {groupedOptions.map((option, index) => {
             // console.log(option);
+            const { key, ...rest } = getOptionProps({ option, index });
             const artists = option.songs.reduce((accumulator, currentValue) => {
               accumulator.push(...currentValue.artists);
               return accumulator;
             }, []);
-
+      
             return (
               <li
-                className={styles.listElement}
-                {...getOptionProps({ option, index })}
+              key={option.slug}  // Pass the key directly
+              className={styles.listElement}
+              {...rest}  // Spread the remaining props
               >
                 <div>
                   <p className={styles.albumTitle}>{option.title}</p>
