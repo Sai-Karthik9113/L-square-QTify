@@ -1,58 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Hero from './components/Hero/Hero.jsx';
-import styles from './App.module.css';
-import { config } from './helpers/api.jsx';
-// import { songs } from './helpers/api.jsx';
 import Section from './components/Section/Section.jsx';
 import FilterSection from './components/FilterSection/FilterSection';
+import styles from './App.module.css';
 
 function App() {
   const [topAlbums, setTopAlbums] = useState([]);
   const [newAlbums, setNewAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
-  // const [genres, setGenres] = useState([]);
-  const [toggle, setToggle] = useState(false);
+  const [genres, setGenres] = useState([]);
   const [value, setValue] = useState(0);
-
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch top albums
-        const topAlbumsData = await axios.get(`${config.endpoint}/albums/top`);
+        const genreResponse = await axios.get('https://qtify-backend-labs.crio.do/genres');
+        setGenres(genreResponse.data?.data || []);
+
+        const topAlbumsData = await axios.get('https://qtify-backend-labs.crio.do/albums/top');
         setTopAlbums(topAlbumsData.data);
 
         // Fetch new albums
-        const newAlbumsData = await axios.get(`${config.endpoint}/albums/new`);
+        const newAlbumsData = await axios.get('https://qtify-backend-labs.crio.do/albums/new');
         setNewAlbums(newAlbumsData.data);
 
         // Fetch songs
-        const songsData = await axios.get(`https://qtify-backend-labs.crio.do/songs`);
-        const response = await songsData.data;
-        setSongs(response);
+        const songsData = await axios.get('https://qtify-backend-labs.crio.do/songs');
+        setSongs(songsData.data);
 
       } catch (error) {
         console.error('Error fetching data:', error);
-        // Handle errors or set default values if needed
-        setTopAlbums([]);
-        setNewAlbums([]);
-        setSongs([]);
       }
     };
 
     fetchData();
   }, []);
 
-  console.log(topAlbums.length, newAlbums.length, songs.length);
+  console.log(songs);
+  
 
   return (
     <>
@@ -67,7 +58,7 @@ function App() {
           title='Songs'
           value={value}
           handleChange={handleChange}
-          handleToggle={handleToggle}
+          genres={genres}
         />
       </div>
     </>

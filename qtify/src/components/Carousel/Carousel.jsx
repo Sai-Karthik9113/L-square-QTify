@@ -12,12 +12,12 @@ const Controls = ({data}) => {
     // console.log(swiper)
     useEffect(() => {
         // swiper.slideTo(0)
-    },[data])
+    },[swiper])
 
     return <></>
 }
 
-const Carousel = ({data,renderCardComponent}) => {
+const Carousel = ({data, renderCardComponent}) => {
     const showArrows = data.length > 7;
     return (
     <div className={styles.wrapper}>
