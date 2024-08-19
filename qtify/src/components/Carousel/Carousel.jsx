@@ -11,28 +11,21 @@ const Controls = ({data}) => {
     let swiper = useSwiper();
     // console.log(swiper)
     useEffect(() => {
-        // swiper.slideTo(0)
-    },[swiper])
+        swiper.slideTo(0)
+    },[data, swiper])
 
     return <></>
 }
 
 const Carousel = ({data, renderCardComponent}) => {
-    const showArrows = data.length > 7;
     return (
     <div className={styles.wrapper}>
-        <Swiper initialSlide = {0} modules={{Navigation}} slidesPerView={'7'} spaceBetween={6} allowTouchMove>
+        <Swiper style={{ padding: '0px' }} initialSlide = {0} modules={{Navigation}} slidesPerView={'auto'} spaceBetween={6} allowTouchMove>
             <Controls data={data} />
-            {
-                showArrows && (
-                    <>
-                        <CarouselLeft />
-                        <CarouselRight />
-                    </>
-                )
-            }
+            <CarouselLeft />
+            <CarouselRight />
             {data.map(item => (
-                <SwiperSlide key={item.id} style={{ padding: '0 16px' }}>
+                <SwiperSlide key={item.id} style={{ width: 'auto', padding: '0 16px' }}>
                     {renderCardComponent(item)}
                 </SwiperSlide>
             ))}

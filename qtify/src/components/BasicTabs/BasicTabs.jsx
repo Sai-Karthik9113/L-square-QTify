@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, CircularProgress, Tab, Tabs } from '@mui/material';
 import AlbumCard from "../Card/Card";
-import Carousel from '../Carousel/Carousel';
+// import Carousel from '../Carousel/Carousel';
 import styles from './BasicTab.module.css';
 
 function CustomTabPanel(props) {
@@ -25,7 +25,11 @@ function CustomTabPanel(props) {
               </Box>
             ) : ( 
               <div className={styles.cardsWrapper}>
-                <Carousel data={filteredData} renderCardComponent={(album) => <AlbumCard data={album} type={type} />} />
+                {
+                    filteredData.map((card) => (
+                    <AlbumCard data={card} type={type} key={card.id} />
+                    ))
+                }
               </div>
             )
           }

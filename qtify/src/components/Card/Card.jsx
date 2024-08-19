@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./Card.module.css"
-import { truncate } from '../../helpers/helpers';
+// import { truncate } from '../../helpers/helpers';
 import {
     Card,
     CardContent,
@@ -42,7 +42,7 @@ const AlbumCard = ({data,type}) => {
                 </CardActionArea>
             </Card>
             <div className={styles.titleWrapper}>
-              <p>{truncate(title, 30)}</p>
+              <p>{title}</p>
             </div>
           </div>
           </Tooltip>
@@ -73,7 +73,7 @@ const AlbumCard = ({data,type}) => {
                 </CardActionArea>
             </Card>
             <div className={styles.titleWrapper}>
-              <p>{truncate(title, 30)}</p>
+              <p>{title}</p>
             </div>
           </div>
           </Tooltip>
@@ -102,7 +102,7 @@ const AlbumCard = ({data,type}) => {
                 </CardActionArea>
             </Card>
             <div className={styles.titleWrapper}>
-              <p>{truncate(title, 30)}</p>
+              <p>{title}</p>
             </div>
           </div>
                     
