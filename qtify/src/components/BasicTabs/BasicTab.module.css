@@ -1,8 +1,3 @@
 .tabs{
     margin-bottom: 18px;
 }
-.cardsWrapper {
-    display: flex;
-    gap: 50px;
-    flex-wrap: wrap;
-}
