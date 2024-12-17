@@ -48,7 +48,7 @@ function App() {
   return (
     <>
       <Navbar searchData={newAlbums} />
-      <Hero />
+      <Hero searchData={newAlbums} />
       <div className={styles.sectionWrapper}>
         <Section type='album' title='Top Albums' data={topAlbums} />
         <Section type='album' title='New Albums' data={newAlbums} />

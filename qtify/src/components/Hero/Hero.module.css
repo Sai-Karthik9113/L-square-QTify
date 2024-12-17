@@ -1,3 +1,11 @@
+.heroContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20%;
+}
+
 .hero {
     background-color: var(--color-black);
     height: 270px;
@@ -5,9 +13,17 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 30px;
 }
 h1 {
     font-weight: 600;
+    font-size: clamp(20px, 4vw, 32px);
 }
+
+@media (max-width: 600px) {
+    .hero {
+        flex-direction: column-reverse;
+        margin-bottom: 5%;
+    }
+}
+
   

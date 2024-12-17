@@ -21,7 +21,29 @@ const Carousel = ({data, renderCardComponent}) => {
     const showArrows = data.length > 7;
     return (
     <div className={styles.wrapper}>
-        <Swiper initialSlide = {0} modules={{Navigation}} slidesPerView={'7'} spaceBetween={6} allowTouchMove>
+        <Swiper
+            initialSlide = {0}
+            modules={{Navigation}}
+            breakpoints={{
+                320: {
+                    slidesPerView: 1.75,
+                },
+                640: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 4,
+                },
+                1024: {
+                    slidesPerView: 6,
+                },
+                1200: {
+                    slidesPerView: 7,
+                    spaceBetween: 6
+                }
+            }}
+            allowTouchMove
+        >
             <Controls data={data} />
             {
                 showArrows && (

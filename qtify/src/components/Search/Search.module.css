@@ -1,17 +1,18 @@
+
+
 .search {
     padding: 14px 20px;
     height: 100%;
     border-radius: 8px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
     border: 1px solid var(--color-black);
-    width: 502px;
+    width: 100%;
   }
   
   .wrapper {
     display: flex;
-    align-items: stretch;
-    height: 48px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   
   .searchButton {
@@ -21,7 +22,8 @@
     border: 1px solid var(--color-black);
     border-left: none;
     cursor: pointer;
-    height: 100%;
+    position: absolute;
+    right: 0;
   }
   
   .listElement {
@@ -36,5 +38,23 @@
   
   .albumArtists {
     font-size: 12px;
+  }
+
+  @media (min-width: 300px) {
+    .searchContainer {
+      width: 80%;
+    }
+  }
+  
+  @media (min-width: 600px) {
+    .searchContainer {
+      width: 60%;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .searchContainer {
+      width: 50%;
+    }
   }
   

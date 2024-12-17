@@ -10,7 +10,7 @@ import {
     Tooltip
 } from "@mui/material";
 
-const AlbumCard = ({data,type}) => {
+const AlbumCard = ({data,type,toggle}) => {
 
   const getCard = (type) => {
 
@@ -22,8 +22,8 @@ const AlbumCard = ({data,type}) => {
         return (
 
           <Tooltip title={`${songs?.length} songs`} placement='top' arrow>
-          <div className={styles.wrapper}>
-            <Card sx={{ borderRadius: '10px' }} className={styles.card}>
+          <div className={`${styles.wrapper} ${toggle ? styles['toggle-active'] : ""}`}>
+            <Card sx={{ borderRadius: '10px' }} className={`${styles.card} ${toggle ? styles['toggle-active'] : ""}`}>
                 <CardActionArea>
                     <CardMedia component="img" height="170" image={image} alt='album' />
                     <CardContent className={styles.cardContent}>
@@ -53,7 +53,7 @@ const AlbumCard = ({data,type}) => {
         const {image,likes,title,songs} = data;
         return (
           <Tooltip title={`${songs?.length} songs`} placement='top' arrow>
-          <div className={styles.wrapper}>
+          <div className={styles.songsWrapper}>
           <Card sx={{ borderRadius: '10px' }} className={styles.card}>
                 <CardActionArea>
                     <CardMedia component="img" height="170" image={image} alt='album' />
@@ -82,7 +82,7 @@ const AlbumCard = ({data,type}) => {
       case 'songFilter' : {
         const {image,likes,title} = data;
         return (
-        <div className={styles.wrapper}>
+        <div className={styles.songsWrapper}>
           <Card sx={{ borderRadius: '10px' }} className={styles.card}>
                 <CardActionArea>
                     <CardMedia component="img" height="170" image={image} alt='album' />

@@ -31,7 +31,7 @@ const Section = ({ title, data, type }) => {
                 ))}
             </div>
           ) : (
-            <Carousel data={data} renderCardComponent={(data) => <AlbumCard data={data} type={type}/>}/>
+            <Carousel data={data} renderCardComponent={(data) => <AlbumCard data={data} type={type} toggle={true}/>}/>
           )}
         </div>
       )}

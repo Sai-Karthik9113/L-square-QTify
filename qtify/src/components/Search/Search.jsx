@@ -70,14 +70,14 @@ function Search({ searchData, placeholder }) {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className={styles.searchContainer} style={{ position: "relative" }}>
       <form
         className={styles.wrapper}
         onSubmit={(e) => {
           onSubmit(e, value);
         }}
       >
-        <div {...getRootProps()}>
+        <div {...getRootProps()} style={{ position: 'relative', width: '100%' }}>
           <input
             type="text"
             name="album"
@@ -87,8 +87,6 @@ function Search({ searchData, placeholder }) {
             value={inputValue} // Set input value from state
             onChange={(e) => setInputValue(e.target.value)} // Handle input change
           />
-        </div>
-        <div>
           <button className={styles.searchButton} type="submit">
             <SearchIcon />
           </button>
